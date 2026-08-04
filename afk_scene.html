@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AFK Scene — Uptown KSJ MLBB Tournament</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Rajdhani:wght@500;600;700&display=swap');
+
+  :root{
+    --bg-void:#08070b;
+    --bg-deep:#150a10;
+    --crimson:#ff2f3d;
+    --crimson-dim:#7a1420;
+    --ember:#ff8a3d;
+    --cyan:#4de1ea;
+    --bone:#f2ede6;
+    --ash:#8a7d82;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{
+    width:100%;height:100%;
+    background:var(--bg-void);
+    overflow:hidden;
+    font-family:'Rajdhani',sans-serif;
+  }
+
+  .stage{
+    position:relative;
+    width:100vw;height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(122,20,32,0.35), transparent 70%),
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(30,8,14,0.9), var(--bg-void) 65%),
+      linear-gradient(180deg, var(--bg-void) 0%, var(--bg-deep) 100%);
+  }
+
+  /* cracked vignette texture */
+  .stage::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,47,61,0.02) 0px, rgba(255,47,61,0.02) 1px, transparent 1px, transparent 90px),
+      repeating-linear-gradient(25deg, rgba(255,47,61,0.02) 0px, rgba(255,47,61,0.02) 1px, transparent 1px, transparent 120px);
+    pointer-events:none;
+  }
+  .stage::after{
+    content:"";
+    position:absolute; inset:0;
+    box-shadow: inset 0 0 220px 60px rgba(0,0,0,0.85);
+    pointer-events:none;
+  }
+
+  /* embers */
+  .embers{ position:absolute; inset:0; overflow:hidden; }
+  .ember{
+    position:absolute; bottom:-20px;
+    width:4px; height:4px;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--ember), rgba(255,138,61,0));
+    box-shadow:0 0 8px 2px rgba(255,138,61,0.6);
+    animation:rise linear infinite;
+    opacity:0;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0; }
+    10%{ opacity:0.9; }
+    100%{ transform:translateY(-110vh) translateX(var(--drift,20px)); opacity:0; }
+  }
+
+  /* top brand strip */
+  .brand{
+    position:absolute; top:52px; left:0; right:0;
+    display:flex; flex-direction:column; align-items:center;
+    gap:6px;
+    letter-spacing:0.35em;
+    z-index:5;
+  }
+  .brand .kicker{
+    font-size:15px; font-weight:700; color:var(--ash);
+    letter-spacing:0.5em;
+  }
+  .brand .title{
+    font-family:'Anton',sans-serif;
+    font-size:34px;
+    letter-spacing:0.12em;
+    background:linear-gradient(180deg,#fff, var(--crimson) 140%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 0 18px rgba(255,47,61,0.45));
+  }
+
+  /* centerpiece */
+  .center{
+    position:relative; z-index:5;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+  }
+
+  .glyph{
+    width:120px; height:120px;
+    margin-bottom:18px;
+    position:relative;
+  }
+  .glyph svg{ width:100%; height:100%; filter:drop-shadow(0 0 24px rgba(255,47,61,0.55)); }
+  .glyph .ring{
+    position:absolute; inset:-18px;
+    border:1.5px solid rgba(255,47,61,0.35);
+    border-radius:50%;
+    animation:spin 14s linear infinite;
+  }
+  .glyph .ring::before{
+    content:"";
+    position:absolute; top:-3px; left:50%;
+    width:6px; height:6px; margin-left:-3px;
+    border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 10px 3px var(--cyan);
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .afk{
+    font-family:'Anton',sans-serif;
+    font-size:150px;
+    line-height:0.9;
+    letter-spacing:0.03em;
+    color:var(--bone);
+    text-shadow:
+      0 0 30px rgba(255,47,61,0.55),
+      0 0 70px rgba(255,47,61,0.25);
+    position:relative;
+    animation:flicker 6s ease-in-out infinite;
+  }
+  .afk span{ color:var(--crimson); }
+
+  @keyframes flicker{
+    0%,92%,100%{ opacity:1; }
+    93%{ opacity:0.55; }
+    94%{ opacity:1; }
+    95%{ opacity:0.35; }
+    96%{ opacity:1; }
+  }
+
+  .subline{
+    margin-top:14px;
+    font-size:26px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    color:var(--ash);
+  }
+  .subline strong{ color:var(--bone); font-weight:700; }
+
+  .status-pill{
+    margin-top:38px;
+    padding:14px 40px;
+    border-radius:999px;
+    background:linear-gradient(90deg, var(--cyan), #7ff0f5);
+    color:#0a1c1e;
+    font-weight:700;
+    letter-spacing:0.28em;
+    font-size:16px;
+    box-shadow:0 0 30px rgba(77,225,234,0.35);
+    display:flex; align-items:center; gap:12px;
+  }
+  .status-pill .dot{
+    width:9px; height:9px; border-radius:50%;
+    background:#0a1c1e;
+    animation:pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.3; transform:scale(0.75); }
+  }
+
+  .timer{
+    margin-top:26px;
+    font-family:'Anton',sans-serif;
+    font-size:22px;
+    letter-spacing:0.15em;
+    color:var(--bone);
+    opacity:0.85;
+  }
+  .timer span{ color:var(--crimson); }
+
+  /* bottom info bar, mirrors poster's contact/social strip */
+  .footer{
+    position:absolute; bottom:44px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center;
+    gap:46px;
+    z-index:5;
+    font-size:17px; font-weight:600;
+    color:var(--ash); letter-spacing:0.05em;
+  }
+  .footer .item{ display:flex; align-items:center; gap:10px; }
+  .footer .item b{ color:var(--bone); }
+  .footer .sep{ width:5px; height:5px; border-radius:50%; background:var(--crimson-dim); }
+
+  .badge{
+    position:absolute; top:52px; right:64px;
+    z-index:5;
+    padding:9px 20px;
+    border:1px solid rgba(255,47,61,0.4);
+    border-radius:6px;
+    font-size:13px; font-weight:700;
+    letter-spacing:0.25em;
+    color:var(--crimson);
+    background:rgba(255,47,61,0.06);
+  }
+  .badge2{
+    position:absolute; top:52px; left:64px;
+    z-index:5;
+    padding:9px 20px;
+    border:1px solid rgba(77,225,234,0.35);
+    border-radius:6px;
+    font-size:13px; font-weight:700;
+    letter-spacing:0.25em;
+    color:var(--cyan);
+    background:rgba(77,225,234,0.05);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="embers" id="embers"></div>
+
+  <div class="badge2">8 TEAM ONLY</div>
+  <div class="badge">ASTAKA KSJ</div>
+
+  <div class="brand">
+    <div class="kicker">UPTOWN KSJ</div>
+    <div class="title">MLBB TOURNAMENT</div>
+  </div>
+
+  <div class="center">
+    <div class="glyph">
+      <div class="ring"></div>
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ff8a3d"/>
+            <stop offset="100%" stop-color="#ff2f3d"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 8 C 30 30, 26 45, 40 58 C 34 60, 30 66, 30 74 C 30 88, 42 96, 50 96 C 58 96, 70 88, 70 74 C 70 66, 66 60, 60 58 C 74 45, 70 30, 50 8 Z" fill="url(#g)"/>
+      </svg>
+    </div>
+
+    <div class="afk">BE RIGHT <span>BACK</span></div>
+    <div class="subline">Player has gone <strong>AFK</strong> &nbsp;·&nbsp; respawning shortly</div>
+
+    <div class="status-pill"><span class="dot"></span> MATCH PAUSED</div>
+
+    <div class="timer">RETURNING IN <span id="clock">05:00</span></div>
+  </div>
+
+  <div class="footer">
+    <div class="item">Contact <b>0172-102711</b></div>
+    <div class="sep"></div>
+    <div class="item"><b>@utmklesport</b></div>
+    <div class="sep"></div>
+    <div class="item"><b>@UTMKL ESPORT CLUB</b></div>
+  </div>
+</div>
+
+<script>
+  // ember particles
+  const field = document.getElementById('embers');
+  const N = 55;
+  for(let i=0;i<N;i++){
+    const e = document.createElement('div');
+    e.className = 'ember';
+    const left = Math.random()*100;
+    const dur = 6 + Math.random()*7;
+    const delay = Math.random()*10;
+    const size = 2 + Math.random()*4;
+    const drift = (Math.random()*80 - 40) + 'px';
+    e.style.left = left+'vw';
+    e.style.width = size+'px';
+    e.style.height = size+'px';
+    e.style.animationDuration = dur+'s';
+    e.style.animationDelay = delay+'s';
+    e.style.setProperty('--drift', drift);
+    field.appendChild(e);
+  }
+
+  // countdown clock (5:00 loop, cosmetic)
+  let total = 300;
+  const clockEl = document.getElementById('clock');
+  function tick(){
+    total--;
+    if(total < 0) total = 300;
+    const m = String(Math.floor(total/60)).padStart(2,'0');
+    const s = String(total%60).padStart(2,'0');
+    clockEl.textContent = m+':'+s;
+  }
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
