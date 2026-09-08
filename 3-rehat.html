@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>UPTOWN KSJ MLBB V2 — Rehat Sebentar</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Chakra+Petch:wght@400;500;600&display=swap');
+
+  :root{
+    --navy-deep:#070b16;
+    --cyan:#3fd4ff;
+    --cyan-soft:#8fe9ff;
+    --violet:#7a6cff;
+    --ink:#eaf3ff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{ width:100vw;height:100vh;overflow:hidden; background:var(--navy-deep); font-family:'Chakra Petch',sans-serif; color:var(--ink); }
+
+  .stage{
+    position:relative; width:100vw;height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(180deg, #070b16 0%, #0a1128 55%, #070b16 100%);
+    animation:hueBreathe 10s ease-in-out infinite;
+  }
+  @keyframes hueBreathe{
+    0%,100%{ filter:hue-rotate(0deg) brightness(1); }
+    50%{ filter:hue-rotate(-6deg) brightness(1.03); }
+  }
+
+  .glow{
+    position:absolute; width:640px; height:640px; border-radius:50%;
+    background:radial-gradient(circle, rgba(122,108,255,0.22), transparent 70%);
+    top:50%; left:50%; transform:translate(-50%,-50%);
+    animation:glowPulse 5s ease-in-out infinite;
+  }
+  @keyframes glowPulse{
+    0%,100%{ transform:translate(-50%,-50%) scale(1); opacity:0.7; }
+    50%{ transform:translate(-50%,-50%) scale(1.15); opacity:1; }
+  }
+
+  .dust{
+    position:absolute; bottom:-10px; border-radius:50%;
+    background:var(--cyan-soft);
+    box-shadow:0 0 6px 2px rgba(143,233,255,0.6);
+    animation-name:float; animation-timing-function:ease-in-out; animation-iteration-count:infinite;
+  }
+  @keyframes float{
+    0%{ transform:translate(0,0); opacity:0; }
+    15%{ opacity:0.7; }
+    50%{ transform:translate(var(--dx,20px), -50vh); }
+    85%{ opacity:0.5; }
+    100%{ transform:translate(calc(var(--dx,20px) * 2), -100vh); opacity:0; }
+  }
+
+  .corner{ position:absolute; width:46px; height:46px; opacity:0.5; animation:pulseCorner 4s ease-in-out infinite; }
+  .corner svg{ width:100%; height:100%; }
+  .tl{top:36px; left:36px;} .tr{top:36px; right:36px; transform:scaleX(-1);}
+  .bl{bottom:36px; left:36px; transform:scaleY(-1);} .br{bottom:36px; right:36px; transform:scale(-1,-1);}
+  @keyframes pulseCorner{ 0%,100%{opacity:0.3;} 50%{opacity:0.7;} }
+
+  .eyebrow{ letter-spacing:0.35em; font-size:15px; color:var(--cyan-soft); font-weight:600; margin-bottom:22px; opacity:0.85; }
+
+  .headline{
+    font-family:'Rajdhani',sans-serif; font-weight:700; font-style:italic;
+    font-size:96px; line-height:0.95; text-align:center; text-transform:uppercase;
+    color:var(--ink); transform:skewX(-6deg);
+    text-shadow:0 0 26px rgba(122,108,255,0.5);
+    animation:softPulse 4.6s ease-in-out infinite;
+  }
+  @keyframes softPulse{
+    0%,100%{ opacity:0.92; } 50%{ opacity:1; text-shadow:0 0 40px rgba(122,108,255,0.7); }
+  }
+
+  .sub{
+    margin-top:34px; font-family:'Rajdhani',sans-serif; font-weight:600;
+    font-size:22px; letter-spacing:0.04em; color:var(--cyan-soft); text-align:center;
+  }
+
+  .clock-row{
+    margin-top:54px; display:flex; align-items:center; gap:14px;
+    font-family:'Rajdhani',sans-serif; font-weight:600; font-size:18px;
+    letter-spacing:0.15em; color:var(--ink); text-transform:uppercase;
+    border:1px solid rgba(122,108,255,0.4); border-radius:999px;
+    padding:12px 28px; background:rgba(122,108,255,0.08);
+  }
+  .clock-icon{ width:20px; height:20px; position:relative; }
+  .clock-icon::before{
+    content:''; position:absolute; inset:0; border:2px solid var(--cyan); border-radius:50%;
+  }
+  .clock-icon::after{
+    content:''; position:absolute; top:50%; left:50%; width:6px; height:1.5px; background:var(--cyan);
+    transform-origin:left center; transform:translate(0,-50%) rotate(0deg);
+    animation:tick 6s linear infinite;
+  }
+  @keyframes tick{ to{ transform:translate(0,-50%) rotate(360deg); } }
+
+  .footer{ position:absolute; bottom:44px; display:flex; gap:24px; }
+  .badge{
+    font-family:'Rajdhani',sans-serif; font-weight:600; font-size:15px;
+    letter-spacing:0.08em; text-transform:uppercase; color:rgba(234,243,255,0.7);
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="glow"></div>
+
+    <div class="corner tl"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#7a6cff" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#7a6cff" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#7a6cff" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#7a6cff" stroke-width="2.5" fill="none"/></svg></div>
+
+    <div class="eyebrow">UPTOWN KSJ MLBB V2</div>
+    <div class="headline">REHAT<br>SEBENTAR</div>
+    <div class="sub">Perlawanan seterusnya akan bermula tidak lama lagi.</div>
+
+    <div class="clock-row"><span class="clock-icon"></span> Sila tunggu</div>
+
+    <div class="footer"><span class="badge">@UTMKLESPORT</span></div>
+  </div>
+
+<script>
+  const stage = document.querySelector('.stage');
+  for(let i=0;i<22;i++){
+    const d = document.createElement('div');
+    d.className='dust';
+    const size = 2 + Math.random()*3;
+    d.style.width = size+'px'; d.style.height = size+'px';
+    d.style.left = (Math.random()*100)+'vw';
+    d.style.animationDuration = (7+Math.random()*7)+'s';
+    d.style.animationDelay = (Math.random()*10)+'s';
+    d.style.setProperty('--dx', (Math.random()*80-40)+'px');
+    stage.appendChild(d);
+  }
+</script>
+</body>
+</html>

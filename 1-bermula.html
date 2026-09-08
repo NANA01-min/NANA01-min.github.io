@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>UPTOWN KSJ MLBB V2 — Bermula Sebentar Lagi</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Chakra+Petch:wght@400;500;600&display=swap');
+
+  :root{
+    --navy-deep:#070b16;
+    --navy:#0e1730;
+    --cyan:#3fd4ff;
+    --cyan-soft:#8fe9ff;
+    --blue:#2166c9;
+    --coral:#ff5a4d;
+    --ink:#eaf3ff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{
+    width:100vw;height:100vh;overflow:hidden;
+    background:var(--navy-deep);
+    font-family:'Chakra Petch',sans-serif;
+    color:var(--ink);
+  }
+  .stage{
+    position:relative;
+    width:100vw;height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:
+      radial-gradient(ellipse 90% 70% at 50% 40%, rgba(33,102,201,0.35), transparent 60%),
+      linear-gradient(180deg, #070b16 0%, #0a1122 55%, #070b16 100%);
+  }
+
+  /* moving grid floor */
+  .grid{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(63,212,255,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(63,212,255,0.09) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse 75% 75% at 50% 45%, black 40%, transparent 85%);
+    animation:driftGrid 14s linear infinite;
+  }
+  @keyframes driftGrid{
+    from{background-position:0 0, 0 0;}
+    to{background-position:0 480px, 480px 0;}
+  }
+
+  /* drifting embers */
+  .ember{
+    position:absolute; bottom:-10px;
+    width:4px;height:4px;border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 8px 2px rgba(63,212,255,0.8);
+    animation-name:rise;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+    opacity:0.85;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0;}
+    10%{opacity:1;}
+    100%{ transform:translateY(-100vh) translateX(var(--drift,20px)); opacity:0;}
+  }
+
+  /* corner reticles, echoing poster crosshairs */
+  .corner{ position:absolute; width:46px; height:46px; opacity:0.65; }
+  .corner svg{ width:100%; height:100%; }
+  .tl{top:36px; left:36px;}
+  .tr{top:36px; right:36px; transform:scaleX(-1);}
+  .bl{bottom:36px; left:36px; transform:scaleY(-1);}
+  .br{bottom:36px; right:36px; transform:scale(-1,-1);}
+  .corner{ animation:pulseCorner 3.2s ease-in-out infinite; }
+  @keyframes pulseCorner{ 0%,100%{opacity:0.35;} 50%{opacity:0.85;} }
+
+  .eyebrow{
+    letter-spacing:0.35em;
+    font-size:15px;
+    color:var(--cyan-soft);
+    font-weight:600;
+    margin-bottom:18px;
+    opacity:0.9;
+  }
+
+  .brand{
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    font-style:italic;
+    font-size:34px;
+    letter-spacing:0.02em;
+    color:var(--ink);
+    text-transform:uppercase;
+    transform:skewX(-6deg);
+    text-shadow:0 0 18px rgba(63,212,255,0.5);
+    margin-bottom:6px;
+  }
+  .brand span{ color:var(--coral); }
+
+  .sub{
+    font-family:'Rajdhani',sans-serif;
+    font-weight:600;
+    font-size:20px;
+    letter-spacing:0.08em;
+    color:var(--cyan-soft);
+    text-transform:uppercase;
+    margin-bottom:56px;
+  }
+
+  .headline-wrap{ position:relative; }
+  .headline{
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    font-style:italic;
+    font-size:96px;
+    line-height:0.95;
+    text-align:center;
+    text-transform:uppercase;
+    color:var(--ink);
+    transform:skewX(-6deg);
+    animation:breathe 3.6s ease-in-out infinite;
+    text-shadow:
+      0 0 20px rgba(63,212,255,0.55),
+      0 0 60px rgba(63,212,255,0.25);
+  }
+  @keyframes breathe{
+    0%,100%{ transform:skewX(-6deg) scale(1); }
+    50%{ transform:skewX(-6deg) scale(1.035); }
+  }
+
+  .loading-row{
+    margin-top:52px;
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+  }
+  .loading-label{
+    font-size:16px; letter-spacing:0.25em; color:var(--cyan-soft); font-weight:500;
+  }
+  .bar{
+    width:420px; height:6px; border-radius:4px;
+    background:rgba(255,255,255,0.08);
+    overflow:hidden;
+    position:relative;
+    border:1px solid rgba(63,212,255,0.3);
+  }
+  .bar::after{
+    content:'';
+    position:absolute; top:0; left:0; height:100%; width:40%;
+    background:linear-gradient(90deg, transparent, var(--cyan), transparent);
+    animation:sweep 1.8s ease-in-out infinite;
+  }
+  @keyframes sweep{
+    0%{ left:-40%; }
+    100%{ left:100%; }
+  }
+
+  .dates{
+    margin-top:60px;
+    display:flex; gap:28px;
+  }
+  .pill{
+    font-family:'Rajdhani',sans-serif; font-weight:600; font-size:18px;
+    letter-spacing:0.05em; text-transform:uppercase;
+    padding:10px 24px; border-radius:999px;
+    border:1px solid rgba(63,212,255,0.4);
+    background:rgba(63,212,255,0.06);
+    color:var(--ink);
+  }
+  .pill b{ color:var(--cyan); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="grid"></div>
+
+    <div class="corner tl"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#3fd4ff" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#3fd4ff" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#3fd4ff" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#3fd4ff" stroke-width="2.5" fill="none"/></svg></div>
+
+    <div class="eyebrow">UTMKL E-SPORT CLUB</div>
+    <div class="brand">UPTOWN KSJ MLBB <span>V2</span></div>
+    <div class="sub">Tournament &middot; 8 &amp; 9 September</div>
+
+    <div class="headline-wrap">
+      <div class="headline">AKAN BERMULA<br>SEBENTAR LAGI</div>
+    </div>
+
+    <div class="loading-row">
+      <div class="loading-label">SEDANG BERSEDIA</div>
+      <div class="bar"></div>
+    </div>
+
+    <div class="dates">
+      <div class="pill">Bermula <b>Pukul 9</b> Malam</div>
+    </div>
+
+    <div id="embers"></div>
+  </div>
+
+<script>
+  const stage = document.querySelector('.stage');
+  const count = 26;
+  for(let i=0;i<count;i++){
+    const e = document.createElement('div');
+    e.className='ember';
+    const left = Math.random()*100;
+    const dur = 6 + Math.random()*6;
+    const delay = Math.random()*10;
+    const drift = (Math.random()*60-30)+'px';
+    e.style.left = left+'vw';
+    e.style.animationDuration = dur+'s';
+    e.style.animationDelay = delay+'s';
+    e.style.setProperty('--drift', drift);
+    stage.appendChild(e);
+  }
+</script>
+</body>
+</html>

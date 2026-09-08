@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>UPTOWN KSJ MLBB V2 — Masalah Teknikal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Chakra+Petch:wght@400;500;600&display=swap');
+
+  :root{
+    --navy-deep:#070b16;
+    --cyan:#3fd4ff;
+    --cyan-soft:#8fe9ff;
+    --coral:#ff4d4d;
+    --amber:#ffb020;
+    --ink:#eaf3ff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{ width:100vw;height:100vh;overflow:hidden; background:var(--navy-deep); font-family:'Chakra Petch',sans-serif; color:var(--ink); }
+
+  .stage{
+    position:relative; width:100vw;height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 45%, rgba(255,77,77,0.12), transparent 65%),
+      linear-gradient(180deg, #070b16 0%, #0a0f1e 55%, #070b16 100%);
+  }
+
+  .scan{
+    position:absolute; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px);
+    mix-blend-mode:overlay;
+  }
+  .noise-flash{
+    position:absolute; inset:0; background:rgba(255,255,255,0.9);
+    opacity:0; pointer-events:none;
+    animation:flash 4.2s steps(1) infinite;
+  }
+  @keyframes flash{
+    0%,96%,100%{ opacity:0; }
+    97%{ opacity:0.06; }
+    97.5%{ opacity:0; }
+    98%{ opacity:0.1; }
+    98.4%{ opacity:0; }
+  }
+
+  .corner{ position:absolute; width:46px; height:46px; opacity:0.55; animation:pulseCorner 1.6s ease-in-out infinite; }
+  .corner svg{ width:100%; height:100%; }
+  .tl{top:36px; left:36px;}
+  .tr{top:36px; right:36px; transform:scaleX(-1);}
+  .bl{bottom:36px; left:36px; transform:scaleY(-1);}
+  .br{bottom:36px; right:36px; transform:scale(-1,-1);}
+  @keyframes pulseCorner{ 0%,100%{opacity:0.25;} 50%{opacity:0.75;} }
+
+  .status-row{
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:34px;
+    font-family:'Rajdhani',sans-serif; font-weight:600;
+    letter-spacing:0.25em; font-size:15px; color:var(--coral);
+    text-transform:uppercase;
+  }
+  .dot{ width:9px; height:9px; border-radius:50%; background:var(--coral); box-shadow:0 0 10px var(--coral); animation:blinkDot 1s ease-in-out infinite; }
+  @keyframes blinkDot{ 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+  .glitch-wrap{ position:relative; }
+  .headline{
+    font-family:'Rajdhani',sans-serif; font-weight:700; font-style:italic;
+    font-size:92px; line-height:0.95; text-align:center; text-transform:uppercase;
+    color:var(--ink); transform:skewX(-6deg); position:relative;
+    text-shadow:0 0 24px rgba(255,77,77,0.35);
+  }
+  .headline::before,.headline::after{
+    content:'MASALAH TEKNIKAL'; position:absolute; left:0; top:0; width:100%;
+    clip-path:inset(0 0 0 0);
+  }
+  .headline::before{ color:var(--cyan); left:2px; animation:glitchTop 4.2s infinite; }
+  .headline::after{ color:var(--coral); left:-2px; animation:glitchBot 4.2s infinite; }
+  @keyframes glitchTop{
+    0%,94%,100%{ clip-path:inset(0 0 100% 0); opacity:0; }
+    95%{ clip-path:inset(10% 0 60% 0); opacity:0.8; transform:translate(3px,-2px);}
+    96%{ clip-path:inset(50% 0 10% 0); opacity:0.8; transform:translate(-4px,2px);}
+    97%{ opacity:0; }
+  }
+  @keyframes glitchBot{
+    0%,94%,100%{ clip-path:inset(100% 0 0 0); opacity:0; }
+    95.3%{ clip-path:inset(60% 0 5% 0); opacity:0.8; transform:translate(-3px,2px);}
+    96.3%{ clip-path:inset(5% 0 55% 0); opacity:0.8; transform:translate(4px,-2px);}
+    97.3%{ opacity:0; }
+  }
+  .headline.jitter{ animation:jitterMove 4.2s infinite; }
+  @keyframes jitterMove{
+    0%,94%,100%{ transform:skewX(-6deg) translate(0,0); }
+    95%{ transform:skewX(-6deg) translate(2px,-1px); }
+    96%{ transform:skewX(-6deg) translate(-3px,1px); }
+    97%{ transform:skewX(-6deg) translate(1px,0); }
+  }
+
+  .sub{
+    margin-top:36px; font-family:'Rajdhani',sans-serif; font-weight:600;
+    font-size:22px; letter-spacing:0.04em; color:var(--cyan-soft); text-align:center; max-width:640px;
+  }
+
+  .signal{
+    margin-top:56px; display:flex; align-items:flex-end; gap:6px;
+  }
+  .signal i{
+    display:block; width:12px; background:var(--cyan); border-radius:2px;
+    animation:barDrop 4.2s infinite;
+    box-shadow:0 0 8px rgba(63,212,255,0.6);
+  }
+  .signal i:nth-child(1){ height:16px; animation-delay:0s;}
+  .signal i:nth-child(2){ height:26px; animation-delay:0.05s;}
+  .signal i:nth-child(3){ height:36px; animation-delay:0.1s;}
+  .signal i:nth-child(4){ height:46px; animation-delay:0.15s;}
+  .signal i:nth-child(5){ height:56px; animation-delay:0.2s;}
+  @keyframes barDrop{
+    0%,90%{ background:var(--cyan); opacity:1; }
+    95%{ background:var(--coral); opacity:0.3; }
+    98%{ background:var(--amber); opacity:0.8; }
+    100%{ background:var(--cyan); opacity:1; }
+  }
+
+  .footer{
+    position:absolute; bottom:44px; font-family:'Chakra Petch',sans-serif;
+    font-size:15px; letter-spacing:0.08em; color:rgba(234,243,255,0.55);
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="scan"></div>
+    <div class="noise-flash"></div>
+
+    <div class="corner tl"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#ff4d4d" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#ff4d4d" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#ff4d4d" stroke-width="2.5" fill="none"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#ff4d4d" stroke-width="2.5" fill="none"/></svg></div>
+
+    <div class="status-row"><span class="dot"></span> Siaran Terputus</div>
+
+    <div class="glitch-wrap">
+      <div class="headline jitter">MASALAH TEKNIKAL</div>
+    </div>
+
+    <div class="sub">Sila bersabar, kru kami sedang membaiki isu ini.<br>Siaran akan disambung semula sebentar lagi.</div>
+
+    <div class="signal">
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="footer">UPTOWN KSJ MLBB V2 TOURNAMENT &middot; @UTMKLESPORT</div>
+  </div>
+</body>
+</html>
