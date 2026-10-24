@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Semi Finals</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<style>
+:root{--navy-deep:#1b0202;--cyan:#fbb12b;--cyan-soft:#ffd9a0;--blue:#14237a;--coral:#e25555;--ink:#eaf3ff}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100vw;height:100vh;overflow:hidden;background:var(--navy-deep);font-family:'Barlow Condensed',sans-serif;color:var(--ink);font-style:italic;font-weight:600}
+.stage{position:relative;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse 90% 70% at 50% 40%,rgba(20,35,122,.6),transparent 60%),linear-gradient(180deg,#1b0202 0%,#3d0404 55%,#1b0202 100%)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(251,177,43,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(251,177,43,.09) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:radial-gradient(ellipse 75% 75% at 50% 45%,black 40%,transparent 85%);-webkit-mask-image:radial-gradient(ellipse 75% 75% at 50% 45%,black 40%,transparent 85%);animation:driftGrid 14s linear infinite}
+@keyframes driftGrid{from{background-position:0 0,0 0}to{background-position:0 480px,480px 0}}
+.ember{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px 2px rgba(251,177,43,.8);animation:rise linear infinite;opacity:.85}
+@keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:1}100%{transform:translateY(-100vh) translateX(var(--drift,20px));opacity:0}}
+.corner{position:absolute;width:46px;height:46px;animation:pulseCorner 3.2s ease-in-out infinite}
+.corner svg{width:100%;height:100%}
+.tl{top:36px;left:36px}.tr{top:36px;right:36px;transform:scaleX(-1)}.bl{bottom:36px;left:36px;transform:scaleY(-1)}.br{bottom:36px;right:36px;transform:scale(-1,-1)}
+@keyframes pulseCorner{0%,100%{opacity:.35}50%{opacity:.85}}
+.eyebrow{letter-spacing:.35em;font-size:15px;color:var(--cyan-soft);font-weight:600;margin-bottom:18px;opacity:.9;text-transform:uppercase}
+.brand{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:46px;letter-spacing:.02em;text-transform:uppercase;transform:skewX(-6deg);text-shadow:0 0 18px rgba(251,177,43,.5);margin-bottom:6px}
+.brand span{color:var(--coral)}
+.sub{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:26px;letter-spacing:.08em;color:var(--cyan-soft);text-transform:uppercase;margin-bottom:56px}
+.headline{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:128px;line-height:.95;text-align:center;text-transform:uppercase;transform:skewX(-6deg);
+  animation:breathe 3.6s ease-in-out infinite;text-shadow:0 0 20px rgba(251,177,43,.55),0 0 60px rgba(251,177,43,.25)}
+@keyframes breathe{0%,100%{transform:skewX(-6deg) scale(1)}50%{transform:skewX(-6deg) scale(1.035)}}
+.loading-row{margin-top:52px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.loading-label{font-size:16px;letter-spacing:.25em;color:var(--cyan-soft);font-weight:500;text-transform:uppercase}
+.bar{width:420px;height:6px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden;position:relative;border:1px solid rgba(251,177,43,.3)}
+.bar::after{content:'';position:absolute;top:0;left:0;height:100%;width:40%;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:sweep 1.8s ease-in-out infinite}
+@keyframes sweep{0%{left:-40%}100%{left:100%}}
+.dates{margin-top:60px;display:flex;gap:28px}
+.pill{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:18px;letter-spacing:.05em;text-transform:uppercase;padding:10px 24px;border-radius:999px;border:1px solid rgba(251,177,43,.4);background:rgba(251,177,43,.06)}
+.tag{margin-top:46px;font-size:20px;letter-spacing:.3em;color:var(--cyan);font-weight:700}
+.pill b{color:var(--cyan)}
+</style></head>
+<body>
+<div class="stage">
+  <div class="grid"></div>
+  <div class="corner tl"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#fbb12b" stroke-width="2.5" fill="none"/></svg></div>
+  <div class="corner tr"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#fbb12b" stroke-width="2.5" fill="none"/></svg></div>
+  <div class="corner bl"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#fbb12b" stroke-width="2.5" fill="none"/></svg></div>
+  <div class="corner br"><svg viewBox="0 0 46 46"><path d="M2 20 V2 H20" stroke="#fbb12b" stroke-width="2.5" fill="none"/></svg></div>
+
+  <!-- EDIT THE TEXT BELOW -->
+  <div class="eyebrow">E-Sports &bull; Mobile Legends</div>
+  <div class="brand">UNIGAMES <span>UTM KL 2026</span></div>
+  <div class="sub">Dewan Azman Hashim &bull; 24 Oct</div>
+
+  <div class="headline">SEMI FINALS<br>STARTING<br>SOON</div>
+
+  <div class="loading-row">
+    <div class="loading-label">GETTING READY</div>
+    <div class="bar"></div>
+  </div>
+  <div class="tag">INNOVATE | DOMINATE | INSPIRE</div>
+
+  <!-- optional pill: remove the comment marks to show it
+  <div class="dates"><div class="pill">Starts at <b>8.30</b> PM</div></div>
+  -->
+</div>
+<script>
+  const stage = document.querySelector('.stage');
+  for(let i=0;i<26;i++){
+    const e = document.createElement('div'); e.className='ember';
+    e.style.left = Math.random()*100+'vw';
+    e.style.animationDuration = (6+Math.random()*6)+'s';
+    e.style.animationDelay = (Math.random()*10)+'s';
+    e.style.setProperty('--drift', (Math.random()*60-30)+'px');
+    stage.appendChild(e);
+  }
+</script>
+</body></html>
